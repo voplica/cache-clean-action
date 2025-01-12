@@ -6,11 +6,15 @@ It triggers cache clean-up for a branch which was deleted, archived, or for whic
 Parameters:
 - `dispatch_token` (**Required**, *string*) - Token used for a workflow dispatch. Should be `$GH_BUILDS_WORKFLOW_DISPATCH_TOKEN`.
 - `gh_hosted_token` (*string*) - Token for GitHub hosted Cache to clean up. Should be: `$GITHUB_TOKEN`. If not present then GitHub
-  hosted cache cleanup is skipped and only self-hosted cache will be cleaned up.
+  hosted cache cleanup is skipped and only self-hosted cache will be cleaned up. Ensure proper permissions are set for the workflow. 
 
 Example:
 ```yaml
 name: Cleanup Branch Cache
+permissions:
+  contents: write
+  actions: write
+  pull-requests: write
 on:
   pull_request:
     types:
