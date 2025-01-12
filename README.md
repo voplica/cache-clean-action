@@ -5,6 +5,8 @@ It triggers cache clean-up for a branch which was deleted, archived, or for whic
 
 Parameters:
 - `dispatch_token` (**Required**, *string*) - Token used for a workflow dispatch. Should be `$GH_BUILDS_WORKFLOW_DISPATCH_TOKEN`.
+- `gh_hosted_token` (*string*) - Token for GitHub hosted Cache to clean up. Should be: `$GITHUB_TOKEN`. If not present then GitHub
+  hosted cache cleanup is skipped and only self-hosted cache will be cleaned up.
 
 Example:
 ```yaml
@@ -25,9 +27,10 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Trigger cache cleanup for a branch
-        uses: voplica/cache-clean-action@v1.1.0
+        uses: voplica/cache-clean-action@v1.2.0
         with:
           dispatch_token: "${{ secrets.GH_BUILDS_WORKFLOW_DISPATCH_TOKEN }}"
+          gh_hosted_token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ###### © 2025 Voplica LLC
